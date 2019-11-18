@@ -1,0 +1,21 @@
+--------------------
+COMMIT - 11/18/2019
+v0.9 - Fix misdefined objShell variable instance with oShell.
+
+-v0.9.
+-Found a misdeclared variable.
+-Fixed it by swapping objShell.Run with oShell.Run on line 200 char 3.
+-" Variable is undefined: 'objShell' "
+--------------------
+
+--------------------
+COMMIT - 11/18/2019
+v0.8 - Initial commit. Get it working and check for bugs.
+
+-v0.8.
+-Initial commit.
+-Work out the bugs.
+-Supports IPS and IDS modes for killing threatening processes automatically, or simply reporting about them (respectively). 
+-Includes Meterpreter_Payload_Detection.exe by Rohan Vazarkar, David Bitner (https://github.com/DamonMohammadbagher/Meterpreter_Payload_Detection). 
+-Includes "Fake sendmail for Windows" by Byron Jones (https://www.glob.com.au/sendmail/).
+--------------------

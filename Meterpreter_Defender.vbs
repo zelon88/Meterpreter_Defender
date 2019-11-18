@@ -1,5 +1,5 @@
 'File Name: Meterpreter_Defender.vbs
-'Version: v0.8, 11/18/2019
+'Version: v0.9, 11/18/2019
 'Author: Justin Grimes, 11/18/2019
 
 '--------------------------------------------------
@@ -19,18 +19,18 @@ dim oShell, oShell2, oFSO, scriptName, tempFile, appPath, logPath, strComputerNa
   ' The "scriptName" is the filename of this script.
   scriptName = "Meterpreter_Defender.vbs"
   ' The "appPath" is the full absolute path for the script directory, with trailing slash.
-  appPath = "\\TFISERVER\AutomationScripts\Meterpreter_Defender\"
+  appPath = "\\SERVER\AutomationScripts\Meterpreter_Defender\"
   ' The "logPath" is the full absolute path for where network-wide logs are stored.
-  logPath = "\\TFISERVEr\Logs"
+  logPath = "\\SERVER\Logs"
   ' The "companyName" the the full, unabbreviated name of your organization.
-  companyName = "Tru Form"
+  companyName = "Company Inc."
   ' The "companyAbbr" is the abbreviated name of your organization.
-  companyAbbr = "TFPM"
+  companyAbbr = "Company"
   ' The "companyDomain" is the domain to use for sending emails. Generated report emails will appear
   ' to have been sent by "COMPUTERNAME@domain.com"
-  companyDomain = "tfpm.com"
+  companyDomain = "Company.com"
   ' The "toEmail" is a valid email address where notifications will be sent.
-  toEmail = "IT@tfpm.com"
+  toEmail = "IT@Company.com"
   ' The "mpdMode" is the mode type for Meterpreter_Payload_Detection.exe. 
   ' To enable detection without any remediation, specify "IDS".
   ' To enable detection AND remediation (kill infected process), specify "IPS".
@@ -197,7 +197,7 @@ End Function
 
 '--------------------------------------------------
 Function killMPD()
-  objShell.Run "taskkill /im Meterpreter_Payload_Detection.exe", 0, FALSE
+  oShell.Run "taskkill /im Meterpreter_Payload_Detection.exe", 0, FALSE
 End Function
 '--------------------------------------------------
 

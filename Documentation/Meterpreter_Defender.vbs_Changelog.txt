@@ -1,5 +1,13 @@
 --------------------
 COMMIT - 11/18/2019
+v1.0 - Remove erroneous log entry being added.
+
+-v1.0.
+-Remove unneeded log entry being created.
+--------------------
+
+--------------------
+COMMIT - 11/18/2019
 v0.9 - Fix misdefined objShell variable instance with oShell.
 
 -v0.9.

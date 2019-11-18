@@ -1,5 +1,5 @@
 'File Name: Meterpreter_Defender.vbs
-'Version: v0.9, 11/18/2019
+'Version: v1.0, 11/18/2019
 'Author: Justin Grimes, 11/18/2019
 
 '--------------------------------------------------
@@ -94,7 +94,6 @@ End Function
 'A function to read files into memory as a string like PHP's file_get_contents.
 'Inspired by https://blog.ctglobalservices.com/scripting-development/jgs/include-other-files-in-vbscript/
 Function fileGetContents(fgcPath) 
-  createLog("Reading contents of file '" & fgcPath & "' into memory." )
   'Set a handle to the file to be opened.
   Set objFGCFile = oFSO.OpenTextFile(fgcPath, 1)
   'Read the contents of the file into a string.

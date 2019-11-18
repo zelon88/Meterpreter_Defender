@@ -10,7 +10,7 @@ ORIGINAL VERSION DATE: 11/18/2019
 
 CURRENT VERSION DATE: 11/18/2019
 
-VERSION: v0.8
+VERSION: v1.0
 
 
 DESCRIPTION: An application for detecting and defending against in-memory hacking tools and exploitations. 

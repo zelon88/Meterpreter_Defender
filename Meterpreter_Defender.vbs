@@ -1,5 +1,5 @@
 'File Name: Meterpreter_Defender.vbs
-'Version: v1.0, 11/18/2019
+'Version: v1.1, 11/19/2019
 'Author: Justin Grimes, 11/18/2019
 
 '--------------------------------------------------
@@ -11,6 +11,7 @@ dim oShell, oShell2, oFSO, scriptName, tempFile, appPath, logPath, strComputerNa
  strUserName, strSafeDate, strSafeTime, strDateTime, logFileName, strEventInfo, objLogFile, tempDir, tempDir0, tempDir1, _
  mailFile, objDangerHashCache, oFile, tempOutput, companyName, companyAbbr, companyDomain, toEmail, cacheData, mpdMode, _
  executionLimit, objFGCFile, sleepTime, infected, continuous
+'--------------------------------------------------
 
   ' ----------
   ' Company Specific variables.
@@ -136,7 +137,7 @@ End Function
 'A function to create a log file.
 Function createLog(strEventInfo)
   If Not strEventInfo = "" Then
-    Set objLogFile = oFSO.CreateTextFile(logFileName, True)
+    Set objLogFile = oFSO.CreateTextFile(logFileName, TRUE)
     objLogFile.WriteLine(strEventInfo)
     objLogFile.Close
   End If
@@ -152,7 +153,7 @@ Function createEmail()
   If Not oFSO.FileExists(mailFile) Then
     oFSO.CreateTextFile(mailFile)
   End If
-  Set oFile = oFSO.CreateTextFile(mailFile, True)
+  Set oFile = oFSO.CreateTextFile(mailFile, TRUE)
   oFile.Write "To: " & toEmail & vbNewLine & "From: " & strComputerName & "@" & companyDomain & vbNewLine & _
    "Subject: " & companyAbbr & " Meterpreter Defender Warning!!!" & vbNewLine & "This is an automatic email from the " & _ 
    companyName & " Network to notify you that a Meterpreter payload was detected on a domain workstation." & _
@@ -196,7 +197,7 @@ End Function
 
 '--------------------------------------------------
 Function killMPD()
-  oShell.Run "taskkill /im Meterpreter_Payload_Detection.exe", 0, FALSE
+  oShell.Run "c:\Windows\System32\cmd.exe /c taskkill /f /im Meterpreter_Payload_Detection.exe", 0, TRUE
 End Function
 '--------------------------------------------------
 
@@ -210,6 +211,7 @@ If Not isUserAdmin() Then
 Else
   'Run until the executionLimit is reached before restarting the entire application (~15m worth of scanning).
   Do While i <= executionLimit
+    WScript.Sleep(15000)
     'Verify that required directories exist & re-create a fresh cache file.
     clearCache()
     'Start Meterpreter_Payload_Detection.exe.
@@ -243,7 +245,7 @@ Else
     'Restart the script.
     restartAsAdmin()
   End If
-  'Kill the current instance of the scipt to reset all variables & handles.
-  WScript.Quit()
 End If
+'Kill the current instance of the scipt to reset all variables & handles.
+WScript.Quit()
 '--------------------------------------------------

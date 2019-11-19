@@ -1,4 +1,12 @@
 --------------------
+COMMIT - 11/19/2019
+v1.1 - Fix bug with locked files.
+
+-v1.1.
+-The taskkill command wasn't working properly, and so when the script restarted it would run into locked cache files.
+--------------------
+
+--------------------
 COMMIT - 11/18/2019
 v1.0 - Remove erroneous log entry being added.
 

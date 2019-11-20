@@ -1,4 +1,15 @@
 --------------------
+COMMIT - 11/20/2019
+v1.2 - Fix bug with locked files.
+
+-v1.2.
+-Improved the escaping of characters and file paths in the run statements. 
+-Tweak the taskkill command line so that it is more specific and more effective at cleaning up zombies.
+-Added some debug code that's commented out by default.
+-Improved code comments.
+--------------------
+
+--------------------
 COMMIT - 11/19/2019
 v1.1 - Fix bug with locked files.
 

@@ -1,5 +1,5 @@
 'File Name: Meterpreter_Defender.vbs
-'Version: v1.1, 11/19/2019
+'Version: v1.2, 11/20/2019
 'Author: Justin Grimes, 11/18/2019
 
 '--------------------------------------------------
@@ -184,20 +184,24 @@ End Function
 '--------------------------------------------------
 'A function for running SendMail to send a prepared Warning.mail email message.
 Function sendEmail() 
-  oShell.run "c:\Windows\System32\cmd.exe /c " & appPath & "sendmail.exe " & mailFile, 0, FALSE
+  oShell.Run "c:\Windows\System32\cmd.exe /c """ & appPath & "sendmail.exe"" """ & mailFile & """", 0, FALSE
 End Function
 '--------------------------------------------------
 
 '--------------------------------------------------
+'A function to start the Meterpreter_Payload_Detection.exe process.
 Function launchMPD(mpdMode)
+  'MsgBox "c:\Windows\System32\cmd.exe /c """ & appPath & "Meterpreter_Payload_Detection.exe"" " & mpdMode & " > """ & tempFile & """"
   oShell.Run "c:\Windows\System32\cmd.exe /c " & appPath & "Meterpreter_Payload_Detection.exe " & _
    mpdMode & " > """ & tempFile & """", 0, FALSE
 End Function
 '--------------------------------------------------
 
 '--------------------------------------------------
+'A function to kill the running Meterpreter_Payload_Detection.exe process that we started earlier.
 Function killMPD()
-  oShell.Run "c:\Windows\System32\cmd.exe /c taskkill /f /im Meterpreter_Payload_Detection.exe", 0, TRUE
+  oShell.Run "c:\Windows\System32\cmd.exe /c taskkill /u " & strUserName & " /s localhost /f /im Meterpreter_Payload_Detection.exe", 0, TRUE
+  'oShell.Run "c:\Windows\System32\cmd.exe /c taskkill /u " & strUserName & "/s localhost /f /im cmd.exe", 0, TRUE
 End Function
 '--------------------------------------------------
 
@@ -211,6 +215,8 @@ If Not isUserAdmin() Then
 Else
   'Run until the executionLimit is reached before restarting the entire application (~15m worth of scanning).
   Do While i <= executionLimit
+    'Sleep for a moment to give locked files time to relax & killes processes time to die.
+    'I have tried 1second, 5seconeds, 10seconds, and 15seconds. 15s was the only one that worked reliably.
     WScript.Sleep(15000)
     'Verify that required directories exist & re-create a fresh cache file.
     clearCache()
@@ -244,8 +250,8 @@ Else
   If continuous Then 
     'Restart the script.
     restartAsAdmin()
+    'Kill the current instance of the scipt to reset all variables & handles.
+    WScript.Quit()
   End If
 End If
-'Kill the current instance of the scipt to reset all variables & handles.
-WScript.Quit()
 '--------------------------------------------------
